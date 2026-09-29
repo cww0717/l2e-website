@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" href="images/favicon.ico">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="script.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -48,11 +47,13 @@
 
   <!-- Hero -->
   <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="videos/l2e-hero-desktop.mp4" type="video/mp4">
+      </video>
+      <div class="container hero-content">
       <div class="hero-badge">ICT AND SECURITY GROUP</div>
-      <h1 class="hero-title">차세대 물리보안<br><span class="highlight">시스템 통합</span>의 파트너</h1>
-      <p class="hero-desc">엘투이 주식회사는 CCTV·출입통제 물리보안 분야의 시스템 통합(SI) 및 솔루션 공급 전문기업으로, Cloud 기반 통합 보안 환경 구축을 선도합니다.</p>
+      <h1 class="hero-title">현장에서 운영까지<br><span class="highlight">물리보안 통합</span>의 파트너</h1>
+      <p class="hero-desc"><span class="highlight">엘투이 주식회사</span>는 CCTV와 출입통제 시스템을 현장 요구에 맞게 설계·구축하고, <br>검증된 벤더 솔루션을 통합하여 안정적인 보안 운영 환경을 제공합니다.</p>
       <div class="hero-actions">
         <a href="#solutions" class="btn btn-primary">솔루션 살펴보기</a>
         <a href="#contact" class="btn btn-outline">문의하기</a>
@@ -258,9 +259,9 @@
         <p class="section-desc">글로벌 벤더의 검증된 솔루션과 L2E의 통합 기술력으로<br>완벽한 물리보안 환경을 구축합니다.</p>
       </div>
 
-      <div class="solutions-grid solutions-grid-3">
+      <div class="solutions-grid solutions-grid-3" id="solutionsGrid">
         <!-- CCTV -->
-        <div class="solution-card solution-card-img">
+        <button class="solution-card solution-card-img" type="button" data-solution="cctv" aria-label="CCTV / 영상감시 벤더 소개 열기" aria-expanded="false">
           <div class="solution-card-bg" style="background-image:url('images/sol-cctv.jpg');"></div>
           <div class="solution-card-content">
             <h3>CCTV / 영상감시</h3>
@@ -271,10 +272,10 @@
               <span class="vendor-badge">한화비전</span>
             </div>
           </div>
-        </div>
+        </button>
 
         <!-- VMS -->
-        <div class="solution-card solution-card-img">
+        <button class="solution-card solution-card-img" type="button" data-solution="vms" aria-label="VMS / NVR 관제 벤더 소개 열기" aria-expanded="false">
           <div class="solution-card-bg" style="background-image:url('images/sol-vms.jpg');"></div>
           <div class="solution-card-content">
             <h3>VMS / NVR 관제</h3>
@@ -285,10 +286,10 @@
               <span class="vendor-badge">Emstone</span>
             </div>
           </div>
-        </div>
+        </button>
 
         <!-- Access Control -->
-        <div class="solution-card solution-card-img">
+        <button class="solution-card solution-card-img" type="button" data-solution="access" aria-label="출입통제 벤더 소개 열기" aria-expanded="false">
           <div class="solution-card-bg" style="background-image:url('images/sol-access.jpg');"></div>
           <div class="solution-card-content">
             <h3>출입통제 (Access Control)</h3>
@@ -299,10 +300,22 @@
               <span class="vendor-badge">LenelS2</span>
             </div>
           </div>
+        </button>
+        <div class="solution-detail" id="solutionDetail" aria-live="polite" hidden>
+          <div class="solution-detail-top">
+            <div class="solution-switcher" role="group" aria-label="솔루션 선택">
+              <button type="button" data-switch-solution="cctv">CCTV / 영상감시</button>
+              <button type="button" data-switch-solution="vms">VMS / NVR 관제</button>
+              <button type="button" data-switch-solution="access">출입통제 시스템</button>
+            </div>
+            <button type="button" class="solution-reset" id="solutionReset" aria-label="솔루션 전체 보기">전체 보기</button>
+          </div>
+          <div class="solution-vendors" id="solutionVendors"></div>
         </div>
       </div>
 
-      <!-- index.html 내 기존 위치 -->
+      <div class="partners-heading"><span>주요 벤더 리스트</span></div>
+      <!-- 기존 파트너 로고 목록은 그대로 유지 -->
       <div class="partner-logos">
         <!-- 첫 줄 5개 -->
         <a href="https://www.axis.com" target="_blank" class="partner-item"><img src="images/logo-axis.png" alt="AXIS"></a>
@@ -365,7 +378,7 @@
         </div>
 
         <div class="portfolio-card">
-          <div class="portfolio-visual" style="background-image:url('images/pf-Trans.png');"></div>
+          <div class="portfolio-visual" style="background-image:url('images/pf-trans.png');"></div>
           <div class="portfolio-body">
             <h3>산업시설 / 물류센터</h3>
             <p>대규모 첨단 공장 및 물류센터의 외곽 경계·통합 영상관제 시스템을 구축했습니다.</p>
@@ -443,7 +456,7 @@
                 <option value="">선택해 주세요</option>
                 <option value="CCTV/VMS">CCTV / VMS</option>
                 <option value="출입통제">출입통제</option>
-                <option value="기타">기타</option>
+                <option value="기타">기타 (견적문의 등..)</option>
               </select>
             </div>
             <div class="form-group">
